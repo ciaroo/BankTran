@@ -25,7 +25,7 @@ void BankAccount::withdraw(double amount, std::string& des) {
 }
 
 void BankAccount::printAccountBalance() {
-    std::cout << std::endl<< "IBAN: " << IBAN << ", Balance: " << balance << std::endl;
+    std::cout << std::endl<< "Account: "<< name <<" "<< surname<<" | IBAN: " << IBAN << ", | Balance: " << balance << std::endl;
     for (const auto& transaction : transactions) {
         transaction.printTransition();
     }

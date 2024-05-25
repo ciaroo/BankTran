@@ -1,0 +1,3 @@
+/Users/francescociarini/CLionProjects/BankTran/cmake-build-debug/CMakeFiles/BankTran.dir
+/Users/francescociarini/CLionProjects/BankTran/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/francescociarini/CLionProjects/BankTran/cmake-build-debug/CMakeFiles/rebuild_cache.dir

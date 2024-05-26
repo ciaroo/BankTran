@@ -13,7 +13,7 @@ Transactions::Transactions(double amount, std:: string& des): amount(amount), de
     data= *localtime(&now);
 }
 
-void Transactions::printTransition() const {
+void Transactions::printTransaction() const {
     std::cout<<"Data: "<< std::put_time(&data, "%Y-%m-%d %H:%M:%S | ") << "Amount: "<< amount << " | Description: "<< description <<std::endl;
 }
 

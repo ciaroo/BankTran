@@ -13,7 +13,7 @@
 
 class BankAccount{
 public:
-    BankAccount (std::string& name, std::string& surname,int iban, double openingBalance);
+    BankAccount (std::string& name, std::string& surname,int iban, double openingBalance, bool member);
 
     void deposit(double amount, std::string& des);
 
@@ -31,7 +31,8 @@ private:
     std:: string name;
     std:: string surname;
     int IBAN;
-
+    bool member;
+    int memberpoint {0};
     double balance;
 };
 

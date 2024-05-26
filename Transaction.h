@@ -13,7 +13,7 @@ class Transactions {
 public:
     Transactions(double amount, std:: string& des);
 
-    void printTransition() const ;
+    void printTransaction() const ;
 
 private:
     double amount;

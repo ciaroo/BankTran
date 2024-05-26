@@ -11,7 +11,7 @@
 
 class Bank {
 public:
-    void addAccount(std:: string name, std::string surname, double openingBalance);
+    void addAccount(std:: string name, std::string surname, double openingBalance, bool member=false);
 
     BankAccount* findAccount(const int IBAN);
 

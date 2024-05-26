@@ -11,8 +11,8 @@
 
 int Bank::IBAN=10001000;
 
-void Bank::addAccount(std:: string name, std::string surname, double openingBalance) {
-    BankAccount newAccount (name, surname, IBAN, openingBalance);
+void Bank::addAccount(std:: string name, std::string surname, double openingBalance, bool member) {
+    BankAccount newAccount (name, surname, IBAN, openingBalance, member);
     accounts.push_back(newAccount);
     std::cout<< "The IBAN of "<<name<<" "<<surname<< " is: "<<IBAN<<std::endl;
     IBAN++;

@@ -9,4 +9,5 @@ add_executable(BankTran main.cpp
         BankAccount.cpp
         BankAccount.h
         Transaction.cpp
-        Transaction.h)
+        Transaction.h
+)

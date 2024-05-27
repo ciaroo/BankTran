@@ -4,6 +4,7 @@
 
 #ifndef BANKTRAN_BANKACCOUNT_H
 #define BANKTRAN_BANKACCOUNT_H
+
 #include <iostream>
 #include <list>
 
@@ -11,28 +12,28 @@
 #include "Bank.h"
 
 
-class BankAccount{
+class BankAccount {
 public:
-    BankAccount (std::string& name, std::string& surname,int iban, double openingBalance, bool member);
+    BankAccount(std::string &name, std::string &surname, int iban, double openingBalance, bool member);
 
-    void deposit(double amount, std::string& des);
+    void deposit(double amount, std::string &des);
 
-    void withdraw(double amount, std::string& des);
+    void withdraw(double amount, std::string &des);
 
     void printAccountBalance();
 
-    int getIBAN(){
+    int getIBAN() {
         return IBAN;
     };
 
 
 private:
     std::list<Transactions> transactions;
-    std:: string name;
-    std:: string surname;
+    std::string name;
+    std::string surname;
     int IBAN;
     bool member;
-    int memberpoint {0};
+    int memberpoint{0};
     double balance;
 };
 

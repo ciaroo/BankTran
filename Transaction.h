@@ -11,14 +11,14 @@
 
 class Transactions {
 public:
-    Transactions(double amount, std:: string& des);
+    Transactions(double amount, std::string &des);
 
-    void printTransaction() const ;
+    void printTransaction() const;
 
 private:
     double amount;
     std::tm data;
-    std:: string description;
+    std::string description;
 };
 
 #endif //BANKTRAN_TRANSACTION_H

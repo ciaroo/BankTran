@@ -9,48 +9,48 @@
 #include "Bank.h"
 #include "BankAccount.h"
 
-int Bank::IBAN=10001000;
+int Bank::IBAN = 10001000;
 
-void Bank::addAccount(std:: string name, std::string surname, double openingBalance, bool member) {
-    BankAccount newAccount (name, surname, IBAN, openingBalance, member);
+void Bank::addAccount(std::string name, std::string surname, double openingBalance, bool member) {
+    BankAccount newAccount(name, surname, IBAN, openingBalance, member);
     accounts.push_back(newAccount);
-    std::cout<< "The IBAN of "<<name<<" "<<surname<< " is: "<<IBAN<<std::endl;
+    std::cout << "The IBAN of " << name << " " << surname << " is: " << IBAN << std::endl;
     IBAN++;
 
 }
 
 BankAccount *Bank::findAccount(const int IBAN) {
-    for(auto & account : accounts)
-        if(account.getIBAN()==IBAN)
+    for (auto &account: accounts)
+        if (account.getIBAN() == IBAN)
             return &account;
     return nullptr;
 }
 
 void Bank::deposit(const int IBAN, int amount, std::string des) {
-    BankAccount* accountTemp = findAccount(IBAN);
+    BankAccount *accountTemp = findAccount(IBAN);
 
-    if(accountTemp)
-        accountTemp->deposit(amount,des);
+    if (accountTemp)
+        accountTemp->deposit(amount, des);
     else
-        std::cout<<"Account not found. "<< std::endl;
+        std::cout << "Account not found. " << std::endl;
 }
 
 void Bank::withdraw(const int IBAN, int amount, std::string des) {
-    BankAccount* accountTemp = findAccount(IBAN);
+    BankAccount *accountTemp = findAccount(IBAN);
 
-    if(accountTemp)
-        accountTemp->withdraw(amount,des);
+    if (accountTemp)
+        accountTemp->withdraw(amount, des);
     else
-        std::cout<<"Account not found. "<< std::endl;
+        std::cout << "Account not found. " << std::endl;
 }
 
 void Bank::printAccountTransaction(const int IBAN) {
-    BankAccount* accountTemp = findAccount(IBAN);
+    BankAccount *accountTemp = findAccount(IBAN);
 
-    if(accountTemp)
+    if (accountTemp)
         accountTemp->printAccountBalance();
     else
-        std::cout<<"Account not found. "<< std::endl;
+        std::cout << "Account not found. " << std::endl;
 
 }
 

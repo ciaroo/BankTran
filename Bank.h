@@ -4,6 +4,7 @@
 
 #ifndef BANKTRAN_BANK_H
 #define BANKTRAN_BANK_H
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -11,9 +12,9 @@
 
 class Bank {
 public:
-    void addAccount(std:: string name, std::string surname, double openingBalance, bool member=false);
+    void addAccount(std::string name, std::string surname, double openingBalance, bool member = false);
 
-    BankAccount* findAccount(const int IBAN);
+    BankAccount *findAccount(const int IBAN);
 
     void deposit(const int IBAN, int amount, std::string des = "DEPOSIT");
 

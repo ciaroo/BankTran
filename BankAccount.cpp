@@ -15,6 +15,8 @@ BankAccount::BankAccount(std::string &name, std::string &surname, int iban, doub
 }
 
 void BankAccount::deposit(double amount, std::string &des) {
+    if (amount==0)
+        throw std::invalid_argument("Zero amount. ");
     balance += amount;
     transactions.emplace_back(amount, des);
     if (member)
@@ -22,11 +24,13 @@ void BankAccount::deposit(double amount, std::string &des) {
 }
 
 void BankAccount::withdraw(double amount, std::string &des) {
+    if (amount==0)
+        throw std::invalid_argument("Zero amount. ");
     if (amount <= balance) {
         balance -= amount;
         transactions.emplace_back(-amount, des);
     } else
-        std::cout << "The selected amount is higher than availability." << std::endl;
+        throw std::invalid_argument("The selected amount is higher than availability.");
 }
 
 void BankAccount::printAccountBalance() {

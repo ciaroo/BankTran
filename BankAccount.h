@@ -16,13 +16,11 @@ class BankAccount {
 public:
     BankAccount(std::string &name, std::string &surname, int iban, double openingBalance, bool member);
 
-    void deposit(double amount, std::string &des);
-
-    void withdraw(double amount, std::string &des);
+    void doTransaction(double amount, std::string &des);
 
     void printAccountBalance();
 
-    int getIBAN() {
+    int getIBAN() const {
         return IBAN;
     };
 

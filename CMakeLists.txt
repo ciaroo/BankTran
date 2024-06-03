@@ -10,4 +10,8 @@ add_executable(BankTran main.cpp
         BankAccount.h
         Transaction.cpp
         Transaction.h
+        TransactionException.cpp
+        TransactionException.h
+        cinException.cpp
+        cinException.h
 )

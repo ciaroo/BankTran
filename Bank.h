@@ -14,14 +14,11 @@ class Bank {
 public:
     void addAccount(std::string name, std::string surname, double openingBalance, bool member = false);
 
-    BankAccount *findAccount(const int IBAN);
+    BankAccount *findAccount(int IBAN);
 
-    void deposit(const int IBAN, int amount, std::string des = "DEPOSIT");
+    void doTransaction(int IBAN, int amount, std::string des = "Transaction");
 
-    void withdraw(const int IBAN, int amount, std::string des = "WITHDRAW");
-
-
-    void printAccountTransaction(const int IBAN);
+    void printAccountTransaction(int IBAN);
 
 
 private:

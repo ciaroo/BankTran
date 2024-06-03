@@ -8,6 +8,7 @@
 #include <string>
 #include "Bank.h"
 #include "BankAccount.h"
+#include "TransactionException.h"
 
 int Bank::IBAN = 10001000;
 
@@ -20,28 +21,22 @@ void Bank::addAccount(std::string name, std::string surname, double openingBalan
 }
 
 BankAccount *Bank::findAccount(const int IBAN) {
+
     for (auto &account: accounts)
         if (account.getIBAN() == IBAN)
             return &account;
+
     return nullptr;
 }
 
-void Bank::deposit(const int IBAN, int amount, std::string des) {
+void Bank::doTransaction(int IBAN, int amount, std::string des) {
+
     BankAccount *accountTemp = findAccount(IBAN);
 
     if (accountTemp)
-        accountTemp->deposit(amount, des);
+        accountTemp->doTransaction(amount, des);
     else
-        std::cout << "Account not found. " << std::endl;
-}
-
-void Bank::withdraw(const int IBAN, int amount, std::string des) {
-    BankAccount *accountTemp = findAccount(IBAN);
-
-    if (accountTemp)
-        accountTemp->withdraw(amount, des);
-    else
-        std::cout << "Account not found. " << std::endl;
+        throw TransactionException("Account not found. ", false);
 }
 
 void Bank::printAccountTransaction(const int IBAN) {
@@ -50,8 +45,7 @@ void Bank::printAccountTransaction(const int IBAN) {
     if (accountTemp)
         accountTemp->printAccountBalance();
     else
-        std::cout << "Account not found. " << std::endl;
-
+        throw TransactionException("Account not found. ", false);
 }
 
 

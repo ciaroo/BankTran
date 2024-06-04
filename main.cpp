@@ -5,7 +5,7 @@
 #include "TransactionException.h"
 #include "cinException.h"
 
-void addAccount(Bank bank){
+void addAccount(Bank& bank){
     std::string name;
     std::string surname;
     double openingBalance;
@@ -32,7 +32,7 @@ void addAccount(Bank bank){
     bank.addAccount(name, surname, openingBalance, member);
 }
 
-void newTransaction(Bank bank){
+void newTransaction(Bank& bank){
     int iban;
     double amount;
     std::string description;
@@ -54,7 +54,7 @@ void newTransaction(Bank bank){
     bank.doTransaction(iban, amount, description);
 }
 
-void printTransaction(Bank bank){
+void printTransaction(Bank& bank){
     int iban;
 
     std::cout << "Insert IBAN. " << std::endl;
@@ -66,7 +66,7 @@ void printTransaction(Bank bank){
 
 }
 
-void doOperation(Bank bank) {
+void doOperation(Bank& bank) {
     bool quit = false;
     char op;
 

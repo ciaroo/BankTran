@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "memory"
 #include "Bank.h"
 #include "BankAccount.h"
 #include "TransactionException.h"
@@ -20,7 +21,7 @@ void Bank::addAccount(std::string name, std::string surname, double openingBalan
 
 }
 
-BankAccount *Bank::findAccount(const int IBAN) {
+BankAccount* Bank::findAccount(const int IBAN) {
 
     for (auto &account: accounts)
         if (account.getIBAN() == IBAN)
@@ -29,7 +30,7 @@ BankAccount *Bank::findAccount(const int IBAN) {
     return nullptr;
 }
 
-void Bank::doTransaction(int IBAN, int amount, std::string des) {
+void Bank::doTransaction(int IBAN, double amount, std::string des) {
 
     BankAccount *accountTemp = findAccount(IBAN);
 

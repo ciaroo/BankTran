@@ -14,15 +14,16 @@
 
 class BankAccount {
 public:
-    BankAccount(std::string &name, std::string &surname, int iban, double openingBalance, bool member);
+    BankAccount(const std::string &name, const std::string &surname, int iban, double openingBalance, bool member);
 
-    void doTransaction(double amount, std::string &des);
+    void doTransaction(double amount,const std::string &des);
 
     void printAccountBalance();
 
     int getIBAN() const {
         return IBAN;
     };
+    
 
 
 private:

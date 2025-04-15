@@ -11,7 +11,7 @@
 
 class Transactions {
 public:
-    Transactions(double amount, std::string &des);
+    Transactions(double amount, const std::string &des);
 
     void printTransaction() const;
 

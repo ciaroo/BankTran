@@ -16,7 +16,7 @@ public:
 
     BankAccount *findAccount(int IBAN);
 
-    void doTransaction(int IBAN, int amount, std::string des = "Transaction");
+    void doTransaction(int IBAN, double amount, std::string des = "Transaction");
 
     void printAccountTransaction(int IBAN);
 

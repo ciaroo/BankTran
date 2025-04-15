@@ -8,7 +8,7 @@
 #include <iomanip>
 
 
-Transactions::Transactions(double amount, std::string &des) : amount(amount), description(des) {
+Transactions::Transactions(double amount, const std::string &des) : amount(amount), description(des) {
     time_t now = time(0);
     data = *localtime(&now);
 }

@@ -125,6 +125,8 @@ void doOperation(Bank& bank) {
             Bank TEMA;
 
             TEMA.addAccount("Francesco", "Ciarini", 2000);
+            TEMA.addAccount("Elena", "Sassi", 50);
+
 
             doOperation(TEMA);
 

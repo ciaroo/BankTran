@@ -8,7 +8,7 @@
 #include "TransactionException.h"
 
 
-BankAccount::BankAccount(std::string &name, std::string &surname, int iban, double openingBalance, bool member) : name(
+BankAccount::BankAccount(const std::string &name, const std::string &surname, int iban, double openingBalance, bool member) : name(
         name), surname(surname), IBAN(iban), balance(openingBalance), member(member) {
     if (member)
         std::cout << "Hi, " << name
@@ -18,8 +18,8 @@ BankAccount::BankAccount(std::string &name, std::string &surname, int iban, doub
         std::cout << "Hi, " << name << "! Account added successfully!"<< std::endl;
 }
 
-void BankAccount::doTransaction(double amount, std::string &des) {
-    if (amount==0 || amount < balance)
+void BankAccount::doTransaction(double amount,const std::string &des) {
+    if (amount==0 || amount + balance < balance)
         throw TransactionException("Amount not valid. ", false);
     balance += amount;
     transactions.emplace_back(amount, des);

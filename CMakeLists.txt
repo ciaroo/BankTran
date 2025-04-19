@@ -3,8 +3,9 @@ project(BankTran)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(BankTran main.cpp
-        Bank.cpp
+add_subdirectory(test)
+
+set(SOURCE_FILES Bank.cpp
         Bank.h
         BankAccount.cpp
         BankAccount.h
@@ -13,5 +14,12 @@ add_executable(BankTran main.cpp
         TransactionException.cpp
         TransactionException.h
         cinException.cpp
-        cinException.h
-)
+        cinException.h)
+
+add_executable(BankTran main.cpp )
+add_library(core ${SOURCE_FILES})
+target_link_libraries(BankTran core)
+enable_testing()
+
+add_subdirectory(googletest)
+

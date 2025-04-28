@@ -20,6 +20,10 @@ public:
 
     void printAccountTransaction(int IBAN);
 
+    bool removeTransaction(int IBAN, size_t idx);
+
+    std::vector<Transactions> searchTransactions(int IBAN, const std::string &keyword);
+
 
 private:
     std::vector<BankAccount> accounts;

@@ -8,12 +8,15 @@
 #include <chrono>
 #include <ctime>
 #include "iostream"
+#include <string>
 
 class Transactions {
 public:
     Transactions(double amount, const std::string &des);
 
-    void printTransaction() const;
+    std::string toString() const;
+
+    double getAmount() const;
 
 private:
     double amount;

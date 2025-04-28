@@ -27,20 +27,51 @@ void BankAccount::doTransaction(double amount,const std::string &des) {
         memberpoint += 5;
 }
 
-void BankAccount::printAccountBalance() {
-    if (member)
-        std::cout << std::endl << "Account: " << name << " " << surname << " | IBAN: " << IBAN << " | Balance: "
-                  << balance << " | Member Point: " << memberpoint << std::endl;
-    else
-        std::cout << std::endl << "Account: " << name << " " << surname << " | IBAN: " << IBAN << " | Balance: "
-                  << balance << std::endl;
-
-    for (const auto &transaction: transactions) {
-        transaction.printTransaction();
-    }
-
+void BankAccount::addTransaction(const Transactions &t) {
+    transactions.push_back(t);
+    balance += t.getAmount();
+    if (member) memberpoint += 5;
 }
 
+bool BankAccount::removeTransaction(size_t idx) {
+    if (idx >= transactions.size())
+        return false;
+    auto it = transactions.begin();
+    std::advance(it, idx);
+    double amt = it->getAmount();
+    transactions.erase(it);
+    balance -= amt;
+    return true;
+}
+
+std::vector<Transactions> BankAccount::searchTransactions(const std::string &keyword) const {
+    std::vector<Transactions> results;
+    for (auto const &t : transactions) {
+        if (t.toString().find(keyword) != std::string::npos)
+            results.push_back(t);
+    }
+    return results;
+}
+
+std::string BankAccount::toString() const {
+    std::ostringstream oss;
+    oss << "Account: " << name << " " << surname
+        << " | IBAN: " << IBAN
+        << " | Balance: " << balance;
+    if (member)
+        oss << " | Member Points: " << memberpoint;
+    oss << "\n";
+
+    size_t idx = 0;
+    for (const auto &tr : transactions) {
+        oss << "[" << idx++ << "] " << tr.toString() << "\n";
+    }
+    return oss.str();
+}
+
+size_t BankAccount::getTransactionCount() const {
+    return transactions.size();
+}
 
 
 

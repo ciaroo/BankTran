@@ -7,9 +7,9 @@
 
 #include <iostream>
 #include <list>
-
+#include <vector>
+#include <sstream>
 #include "Transaction.h"
-#include "Bank.h"
 
 
 class BankAccount {
@@ -18,12 +18,18 @@ public:
 
     void doTransaction(double amount,const std::string &des);
 
-    void printAccountBalance();
+    void addTransaction(const Transactions &t);
+
+    bool removeTransaction(size_t idx);
+
+    std::vector<Transactions> searchTransactions(const std::string &keyword) const;
+
+    std::string toString() const;
 
     int getIBAN() const {
         return IBAN;
     };
-    
+    size_t getTransactionCount() const;
 
 
 private:

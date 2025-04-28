@@ -6,6 +6,8 @@
 #include <chrono>
 #include <ctime>
 #include <iomanip>
+#include <sstream>
+#include <string>
 
 
 Transactions::Transactions(double amount, const std::string &des) : amount(amount), description(des) {
@@ -13,9 +15,17 @@ Transactions::Transactions(double amount, const std::string &des) : amount(amoun
     data = *localtime(&now);
 }
 
-void Transactions::printTransaction() const {
-    std::cout << "Data: " << std::put_time(&data, "%Y-%m-%d %H:%M:%S | ") << "Amount: " << amount << " | Description: "
-              << description << std::endl;
+std::string Transactions::toString() const {
+    std::ostringstream oss;
+    oss << "Data: " << std::put_time(&data, "%Y-%m-%d %H:%M:%S")
+        << " | Amount: " << amount
+        << " | Description: " << description;
+    return oss.str();
+
+}
+
+double Transactions::getAmount() const {
+    return amount;
 }
 
 

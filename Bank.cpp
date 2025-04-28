@@ -44,9 +44,22 @@ void Bank::printAccountTransaction(const int IBAN) {
     BankAccount *accountTemp = findAccount(IBAN);
 
     if (accountTemp)
-        accountTemp->printAccountBalance();
+        std::cout << accountTemp->toString();
     else
         throw TransactionException("Account not found. ", false);
 }
 
+bool Bank::removeTransaction(int IBAN, size_t idx) {
+    BankAccount* acc = findAccount(IBAN);
+    if (!acc)
+        throw TransactionException("Account not found.", false);
+    return acc->removeTransaction(idx);
+}
+
+std::vector<Transactions> Bank::searchTransactions(int IBAN, const std::string &keyword) {
+    BankAccount* acc = findAccount(IBAN);
+    if(!acc)
+        throw TransactionException("Account not found.", false);
+    return acc->searchTransactions(keyword);
+}
 

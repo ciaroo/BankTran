@@ -6,10 +6,14 @@
 #include "BankAccount.h"
 #include "Transaction.h"
 #include "TransactionException.h"
+#include <stdexcept>
 
 
 BankAccount::BankAccount(const std::string &name, const std::string &surname, int iban, double openingBalance, bool member) : name(
         name), surname(surname), IBAN(iban), balance(openingBalance), member(member) {
+    if (openingBalance < 0) {
+        throw std::invalid_argument("Opening balance cannot be negative");
+    }
     if (member)
         std::cout << "Hi, " << name
                   << "! You are a member of the bank. You will receive 5 member points with every deposit! "
@@ -19,18 +23,18 @@ BankAccount::BankAccount(const std::string &name, const std::string &surname, in
 }
 
 void BankAccount::doTransaction(double amount,const std::string &des) {
-    if (amount==0 || amount + balance < balance)
+    if (amount==0)
         throw TransactionException("Amount not valid. ", false);
     balance += amount;
     transactions.emplace_back(amount, des);
     if (member)
-        memberpoint += 5;
+        memberPoint += 5;
 }
 
-void BankAccount::addTransaction(const Transactions &t) {
+void BankAccount::addTransaction(const Transaction &t) {
     transactions.push_back(t);
     balance += t.getAmount();
-    if (member) memberpoint += 5;
+    if (member) memberPoint += 5;
 }
 
 bool BankAccount::removeTransaction(size_t idx) {
@@ -44,8 +48,8 @@ bool BankAccount::removeTransaction(size_t idx) {
     return true;
 }
 
-std::vector<Transactions> BankAccount::searchTransactions(const std::string &keyword) const {
-    std::vector<Transactions> results;
+std::vector<Transaction> BankAccount::searchTransactions(const std::string &keyword) const {
+    std::vector<Transaction> results;
     for (auto const &t : transactions) {
         if (t.toString().find(keyword) != std::string::npos)
             results.push_back(t);
@@ -59,7 +63,7 @@ std::string BankAccount::toString() const {
         << " | IBAN: " << IBAN
         << " | Balance: " << balance;
     if (member)
-        oss << " | Member Points: " << memberpoint;
+        oss << " | Member Points: " << memberPoint;
     oss << "\n";
 
     size_t idx = 0;
@@ -71,6 +75,22 @@ std::string BankAccount::toString() const {
 
 size_t BankAccount::getTransactionCount() const {
     return transactions.size();
+}
+
+double BankAccount::getBalance() const {
+    return balance;
+}
+
+int BankAccount::getMemberPoint() const {
+    return memberPoint;
+}
+
+const std::string &BankAccount::getSurname() const {
+    return surname;
+}
+
+const std::string &BankAccount::getName() const {
+    return name;
 }
 
 

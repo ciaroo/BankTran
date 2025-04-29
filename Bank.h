@@ -22,12 +22,12 @@ public:
 
     bool removeTransaction(int IBAN, size_t idx);
 
-    std::vector<Transactions> searchTransactions(int IBAN, const std::string &keyword);
+    std::vector<Transaction> searchTransactions(int IBAN, const std::string &keyword);
 
 
 private:
-    std::vector<BankAccount> accounts;
-    static int IBAN;
+    std::list<BankAccount> accounts;
+    static int nextIBAN;
 
 };
 

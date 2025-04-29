@@ -10,9 +10,9 @@
 #include "iostream"
 #include <string>
 
-class Transactions {
+class Transaction {
 public:
-    Transactions(double amount, const std::string &des);
+    Transaction(double amount, const std::string &des);
 
     std::string toString() const;
 

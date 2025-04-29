@@ -10,12 +10,12 @@
 #include <string>
 
 
-Transactions::Transactions(double amount, const std::string &des) : amount(amount), description(des) {
+Transaction::Transaction(double amount, const std::string &des) : amount(amount), description(des) {
     time_t now = time(0);
     data = *localtime(&now);
 }
 
-std::string Transactions::toString() const {
+std::string Transaction::toString() const {
     std::ostringstream oss;
     oss << "Data: " << std::put_time(&data, "%Y-%m-%d %H:%M:%S")
         << " | Amount: " << amount
@@ -24,7 +24,7 @@ std::string Transactions::toString() const {
 
 }
 
-double Transactions::getAmount() const {
+double Transaction::getAmount() const {
     return amount;
 }
 

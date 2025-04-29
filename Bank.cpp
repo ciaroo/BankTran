@@ -11,13 +11,13 @@
 #include "BankAccount.h"
 #include "TransactionException.h"
 
-int Bank::IBAN = 10001000;
+int Bank::nextIBAN = 10001000;
 
 void Bank::addAccount(std::string name, std::string surname, double openingBalance, bool member) {
-    BankAccount newAccount(name, surname, IBAN, openingBalance, member);
+    BankAccount newAccount(name, surname, nextIBAN, openingBalance, member);
     accounts.push_back(newAccount);
-    std::cout << "The IBAN of " << name << " " << surname << " is: " << IBAN << std::endl;
-    IBAN++;
+    std::cout << "The IBAN of " << name << " " << surname << " is: " << nextIBAN << std::endl;
+    nextIBAN++;
 
 }
 
@@ -56,7 +56,7 @@ bool Bank::removeTransaction(int IBAN, size_t idx) {
     return acc->removeTransaction(idx);
 }
 
-std::vector<Transactions> Bank::searchTransactions(int IBAN, const std::string &keyword) {
+std::vector<Transaction> Bank::searchTransactions(int IBAN, const std::string &keyword) {
     BankAccount* acc = findAccount(IBAN);
     if(!acc)
         throw TransactionException("Account not found.", false);

@@ -18,27 +18,36 @@ public:
 
     void doTransaction(double amount,const std::string &des);
 
-    void addTransaction(const Transactions &t);
+    void addTransaction(const Transaction &t);
 
     bool removeTransaction(size_t idx);
 
-    std::vector<Transactions> searchTransactions(const std::string &keyword) const;
+    std::vector<Transaction> searchTransactions(const std::string &keyword) const;
 
     std::string toString() const;
 
     int getIBAN() const {
         return IBAN;
     };
+
+    double getBalance() const;
+
+    int getMemberPoint() const;
+
+    const std::string &getSurname() const;
+
+    const std::string &getName() const;
+
     size_t getTransactionCount() const;
 
 
 private:
-    std::list<Transactions> transactions;
+    std::list<Transaction> transactions;
     std::string name;
     std::string surname;
     int IBAN;
     bool member;
-    int memberpoint{0};
+    int memberPoint{0};
     double balance;
 };
 

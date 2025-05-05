@@ -39,7 +39,7 @@ TEST(BankAccountTest, RemoveTransaction) {
     acc.doTransaction(20.0, "T1");
     acc.doTransaction(-5.0, "T2");
     EXPECT_EQ(acc.getTransactionCount(), 2);
-    // Remove second transaction
+
     EXPECT_TRUE(acc.removeTransaction(1));
     EXPECT_EQ(acc.getTransactionCount(), 1);
 
@@ -53,4 +53,18 @@ TEST(BankAccountTest, SearchTransactions) {
     auto res = acc.searchTransactions("Stipendio");
     ASSERT_EQ(res.size(), 1);
     EXPECT_EQ(res[0].getAmount(), 10.0);
+}
+
+TEST(BankTest, AddFindAccount) {
+    Bank bank;
+    bank.addAccount("Eve", "Black", 500.0);
+    // First IBAN should be 10001000
+    BankAccount* a1 = bank.findAccount(10001000);
+    ASSERT_NE(a1, nullptr);
+    EXPECT_EQ(a1->getIBAN(), 10001000);
+}
+
+TEST(BankTest, DoTransactionNonexistentThrows) {
+    Bank bank;
+    EXPECT_THROW(bank.doTransaction(999999, 10.0, "x"), TransactionException);
 }

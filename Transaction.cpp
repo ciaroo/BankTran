@@ -8,9 +8,13 @@
 #include <iomanip>
 #include <sstream>
 #include <string>
+#include "TransactionException.h"
 
 
 Transaction::Transaction(double amount, const std::string &des) : amount(amount), description(des) {
+    if (amount == 0.0) {
+        throw TransactionException("Amount must not be zero", false);
+    }
     time_t now = time(0);
     data = *localtime(&now);
 }

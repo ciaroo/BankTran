@@ -9,6 +9,7 @@
 #include <ctime>
 #include "iostream"
 #include <string>
+#include "TransactionException.h"
 
 class Transaction {
 public:

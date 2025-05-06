@@ -17,6 +17,17 @@ TEST(TransactionsTest, negativeAmount){
     EXPECT_DOUBLE_EQ(test.getAmount(), -129.70);
 }
 
+TEST(TransactionTest, toStringTest) {
+    Transaction t(1070, "Prova");
+    std::string s = t.toString();
+    EXPECT_NE(s.find("1070"), std::string::npos);
+    EXPECT_NE(s.find("Prova"), std::string::npos);
+}
+
+TEST(TransactionTest, zeroAmount) {
+    EXPECT_THROW(Transaction(0.0, "Importo zero"), TransactionException);
+}
+
 TEST(BankAccountTest, openingBalanceNegativeThrows) {
     EXPECT_THROW(BankAccount("Mario", "Rossi", 8, -50.0, false), std::invalid_argument);
 }

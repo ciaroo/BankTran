@@ -23,7 +23,7 @@ BankAccount::BankAccount(const std::string &name, const std::string &surname, in
 }
 
 void BankAccount::doTransaction(double amount,const std::string &des) {
-    if (amount==0)
+    if (amount==0||amount+balance<0)
         throw TransactionException("Amount not valid. ", false);
     balance += amount;
     transactions.emplace_back(amount, des);
@@ -39,7 +39,8 @@ void BankAccount::addTransaction(const Transaction &t) {
 
 bool BankAccount::removeTransaction(size_t idx) {
     if (idx >= transactions.size())
-        return false;
+        throw TransactionException(
+                "Nessuna transazione trovata per l'indice cercato", false);
     auto it = transactions.begin();
     std::advance(it, idx);
     double amt = it->getAmount();
@@ -54,7 +55,13 @@ std::vector<Transaction> BankAccount::searchTransactions(const std::string &keyw
         if (t.toString().find(keyword) != std::string::npos)
             results.push_back(t);
     }
-    return results;
+    if (results.empty()) {
+        throw TransactionException(
+                "Nessuna transazione trovata per la parola chiave: \"" + keyword + "\"",
+                false
+        );
+    }
+        return results;
 }
 
 std::string BankAccount::toString() const {

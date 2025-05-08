@@ -19,6 +19,8 @@ public:
 
     double getAmount() const;
 
+    const std::string &getDescription() const;
+
 private:
     double amount;
     std::tm data;

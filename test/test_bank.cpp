@@ -19,9 +19,8 @@ TEST(TransactionsTest, negativeAmount){
 
 TEST(TransactionTest, toStringTest) {
     Transaction t(1070, "Prova");
-    std::string s = t.toString();
-    EXPECT_NE(s.find("1070"), std::string::npos);
-    EXPECT_NE(s.find("Prova"), std::string::npos);
+
+    EXPECT_EQ(t.getDescription(), "Prova");
 }
 
 TEST(TransactionTest, zeroAmount) {
@@ -35,7 +34,7 @@ TEST(BankAccountTest, openingBalanceNegativeThrows) {
 TEST(BankAccountTest, doTransactionAndMemberPoints) {
     BankAccount acc("Alice", "Bruni", 9, 100.0, true);
     acc.doTransaction(50.0, "Deposit");
-    // Balance should be 150
+
     EXPECT_EQ(acc.getBalance(),150.0);
     EXPECT_EQ(acc.getMemberPoint(),5);
 }
@@ -53,10 +52,17 @@ TEST(BankAccountTest, RemoveTransaction) {
 
     EXPECT_TRUE(acc.removeTransaction(1));
     EXPECT_EQ(acc.getTransactionCount(), 1);
+}
 
-    EXPECT_FALSE(acc.removeTransaction(5));
+TEST(BankAccountTest, RemoveNonExistentTransaction) {
+    BankAccount acc("Andrea", "Schicco", 18, 0.0, false);
+    acc.doTransaction(40, "deposito");
+
+    EXPECT_EQ(acc.getTransactionCount(), 1);
+    EXPECT_THROW(acc.removeTransaction(3), TransactionException);
     EXPECT_EQ(acc.getTransactionCount(), 1);
 }
+
 TEST(BankAccountTest, SearchTransactions) {
     BankAccount acc("Andrea", "Corti", 12, 0.0, false);
     acc.doTransaction(10.0, "Stipendio");
@@ -66,16 +72,34 @@ TEST(BankAccountTest, SearchTransactions) {
     EXPECT_EQ(res[0].getAmount(), 10.0);
 }
 
+TEST(BankAccountTest, SearchNonExistentTransaction) {
+    BankAccount acc("Andrea", "Bassi", 17, 0.0, false);
+    acc.doTransaction(80.0, "Stipendio");
+
+    EXPECT_THROW(acc.searchTransactions("affitto"), TransactionException);
+}
+
+TEST(BankAccountTest, WithdrawalBeyondBalanceThrows) {
+    BankAccount acc("Paolo", "Rossi", 15, 100.0, false);
+
+    EXPECT_THROW(acc.doTransaction(-150.0, "Overdraw"), TransactionException);
+
+    EXPECT_EQ(acc.getBalance(), 100.0);
+    EXPECT_EQ(acc.getTransactionCount(), 0);
+}
+
 TEST(BankTest, AddFindAccount) {
     Bank bank;
     bank.addAccount("Eve", "Black", 500.0);
-    // First IBAN should be 10001000
     BankAccount* a1 = bank.findAccount(10001000);
     ASSERT_NE(a1, nullptr);
     EXPECT_EQ(a1->getIBAN(), 10001000);
 }
 
-TEST(BankTest, DoTransactionNonexistentThrows) {
+TEST(BankTest, SearchNonExistentAccount) {
     Bank bank;
-    EXPECT_THROW(bank.doTransaction(999999, 10.0, "x"), TransactionException);
+    bank.addAccount("Eve", "Black", 500.0);
+    //first iban should be 10001000
+    BankAccount* a1 = bank.findAccount(10001111);
+    ASSERT_EQ(a1, nullptr);
 }

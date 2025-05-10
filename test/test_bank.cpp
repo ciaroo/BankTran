@@ -6,6 +6,18 @@
 #include "../BankAccount.h"
 #include "../Bank.h"
 #include "../TransactionException.h"
+#include <string>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
+
+std::string getCurrentDateTime() {
+    std::time_t now = std::time(nullptr);
+    std::tm* localTime = std::localtime(&now);
+    std::ostringstream oss;
+    oss << std::put_time(localTime, "%Y-%m-%d %H:%M:%S");
+    return oss.str();
+}
 
 TEST(TransactionsTest, positiveAmount) {
     Transaction test(123.45, "prova deposito");
@@ -17,10 +29,11 @@ TEST(TransactionsTest, negativeAmount){
     EXPECT_DOUBLE_EQ(test.getAmount(), -129.70);
 }
 
-TEST(TransactionTest, toStringTest) {
+TEST(TransactionTest, toString) {
     Transaction t(1070, "Prova");
-
-    EXPECT_EQ(t.getDescription(), "Prova");
+    std::string date = getCurrentDateTime();
+    std::string expected = "Data: " + date + " | Amount: 1070 | Description: Prova";
+    EXPECT_EQ(t.toString(), expected);
 }
 
 TEST(TransactionTest, zeroAmount) {
